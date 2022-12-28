@@ -1,0 +1,91 @@
+<div class="app">
+  <div class="wrapper">
+    <h2 class="title">Đăng ký</h2>
+    <form action="" (ngSubmit)="onSubmit(rfRegister)" class="form__div" [formGroup]="rfRegister">
+      <!--      form tương ứng với form gần nhất hoặc form array-->
+      <div class="wrapper__form">
+        <div class="form__item">
+          <ng-container *ngTemplateOutlet="TmplInput;context: contextSurname"></ng-container>
+          <ng-container *ngTemplateOutlet="TmplInput;context: contextName"></ng-container>
+        </div>
+        <span class="item__error"
+              *ngIf="(rfRegister.controls['inputSurname'].errors|| rfRegister.controls['inputName'].errors) && isSubmit"
+        >Hãy nhập {{ rfRegister.controls['inputSurname'].errors ? 'họ ' : '' }}
+          {{ rfRegister.controls['inputSurname'].errors && rfRegister.controls['inputName'].errors ? 'và ' : ''}}
+          {{ rfRegister.controls['inputName'].errors ? 'tên ' : ''}}
+        </span>
+        <div class=" form__item form__email">
+          <ng-container *ngTemplateOutlet="TmplInput;context: contextEmail"></ng-container>
+        </div>
+        <span *ngIf="rfRegister.hasError('emailNoLength') && isSubmit" class="item__error">
+          {{rfRegister.errors['messageEmail']}}
+        </span>
+        <span class="item__error"
+              *ngIf="rfRegister.get('inputEmail').errors && isSubmit && !rfRegister.hasError('emailNoLength')">
+          {{rfRegister.get('inputEmail').errors && isSubmit && !rfRegister.hasError('emailNoLength') ? 'Sai định dạng email' : '' }}
+        </span>
+        <span class="email__supp">Sử dụng chữ cái, số và dấu chấm</span>
+        <div class="form__item left">
+          <label class="label__item">{{contextDate.displayName + ': '}}</label>
+          <ng-container *ngTemplateOutlet="TmplInput;context: contextDate"></ng-container>
+        </div>
+        <div class="form__item left">
+          <span class="label__item">{{contextMale.displayName + ': '}}</span>
+          <div>
+            <label [for]="contextMale.valueMale">{{contextMale.valueMale}}</label>
+            <ng-container *ngTemplateOutlet="TmplInput;context: contextMale"></ng-container>
+          </div>
+          <div>
+            <label [for]="contextFeMale.valueMale">{{contextFeMale.valueMale}}</label>
+            <ng-container *ngTemplateOutlet="TmplInput;context: contextFeMale"></ng-container>
+          </div>
+        </div>
+        <div class="form__item form__password">
+          <ng-container *ngTemplateOutlet="TmplInput;context: contextPassword"></ng-container>
+          <ng-container *ngTemplateOutlet="TmplInput;context: contextConfirm"></ng-container>
+        </div>
+        <span *ngIf="rfRegister.hasError('invalid') && isSubmit" class="item__error">
+          {{rfRegister.errors['message']}}
+        </span>
+
+        <!--        <span *ngIf="(rfRegister.hasError('passNoLength') ||-->
+        <!--        rfRegister.hasError('passwordStrength') ||-->
+        <!--        rfRegister.hasError('passLengthError')) && isSubmit" class="item__error">-->
+        <!--          {{rfRegister.errors['message']}}-->
+        <!--        </span>-->
+        <!--        <span class="item__error"-->
+        <!--              *ngIf="rfRegister.get('inputPassword').value !== rfRegister.get('inputConfirm').value && rfRegister.get('inputConfirm').touched">-->
+        <!--          {{rfRegister.hasError('passwordnotmatch') &&-->
+        <!--        rfRegister.get('inputConfirm').touched && isSubmit ? 'Các mật khẩu đã nhập không khớp. Hãy thử lại.' : '' }}-->
+
+        <!--        </span>-->
+        <div class="confirmPass">
+          <input id="checkPass" class="checkPass" type="checkbox" (click)="showPass()">
+          <label for="checkPass">Hiện mật khẩu</label>
+        </div>
+
+      </div>
+      <button class="btn__submit" type="submit">Tiếp theo</button>
+      <ng-template #TmplInput
+                   let-controlName="controlName"
+                   let-displayName="displayName"
+                   let-type="type"
+                   let-id="valueMale"
+      >
+        <input class="item__input" [type]="type" [placeholder]="displayName" [formControlName]="controlName"
+               [class.input__error]="rfRegister.get(controlName).errors &&
+               rfRegister.get(controlName).touched &&
+               rfRegister.hasError('invalid') &&
+               isSubmit"
+        >
+      </ng-template>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+
+
