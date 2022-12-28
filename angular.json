@@ -66,6 +66,9 @@
               "browserTarget": "registerForm:build:development"
             }
           },
+          "options": {
+            "port": 7777
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
@@ -94,5 +97,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
