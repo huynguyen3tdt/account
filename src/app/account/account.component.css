@@ -110,6 +110,11 @@
 .gender-item:first-of-type{
   padding-left: 5px;
 }
+.gender-item label{
+  font-size: 12px;
+  display: flex;
+  flex-direction: row-reverse;
+}
 .gender-item input[type="radio"],
 .gender-item input[type="radio"]:focus
 {

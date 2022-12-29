@@ -88,8 +88,14 @@ export class AccountComponent implements OnInit {
           validators: [Validators.required, Validators.email],
           updateOn: "change"
         }),
-        inputDate: new FormControl(''),
-        inputMale: new FormControl(''),
+        inputDate: new FormControl('', {
+          validators: [Validators.required],
+          updateOn: "change"
+        }),
+        inputGender: new FormControl('male', {
+          validators: [Validators.required],
+          updateOn: "change"
+        }),
         inputPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
         inputConfirm: new FormControl('')
       },
@@ -101,7 +107,7 @@ export class AccountComponent implements OnInit {
   onSubmit(rf: object) {
     this.isSubmit = true;
     this.fgRegister.markAllAsTouched();
-    console.log(rf)
+    console.log(this.fgRegister.value);
   }
 
   showPass() {
@@ -130,17 +136,17 @@ export class AccountComponent implements OnInit {
   }
   contextMale = {
     id: "male",
-    controlName: "inputMale",
+    controlName: "inputGender",
     displayName: "Giới tính",
     type: "radio",
-    valueMale: "Male"
+    value: 'Male'
   }
   contextFeMale = {
     id: "female",
-    controlName: "inputMale",
+    controlName: "inputGender",
     displayName: "Giới tính",
     type: "radio",
-    valueMale: "Female"
+    value: 'Female'
   }
 
   contextPassword = {
@@ -152,6 +158,5 @@ export class AccountComponent implements OnInit {
     controlName: "inputConfirm",
     displayName: "Xác Nhận",
     type: "password"
-
   }
 }

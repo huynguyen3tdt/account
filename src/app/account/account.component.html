@@ -1,6 +1,11 @@
 <div class="app">
   <div class="wrapper">
     <h2 class="title">Đăng ký</h2>
+
+    <div class="changeLanguage">
+
+    </div>
+
     <form [formGroup]="fgRegister"
           class="form-div"
           (ngSubmit)="onSubmit(fgRegister)"
@@ -58,16 +63,24 @@
             {{contextMale.displayName + ': '}}
           </span>
           <div class="gender-item">
-            <label [for]="contextMale.id">
-              {{contextMale.valueMale}}
+            <label for="male">
+              Male
+              <input id="male" type="radio" value="male" name="inputGender" formControlName="inputGender">
             </label>
-            <ng-container *ngTemplateOutlet="tmplInput; context: contextMale"></ng-container>
+<!--            <label [for]="contextMale.id">-->
+<!--              {{contextMale.value}}-->
+<!--              <ng-container *ngTemplateOutlet="tmplInput; context: contextMale"></ng-container>-->
+<!--            </label>-->
           </div>
           <div class="gender-item">
-            <label [for]="contextFeMale.id">
-              {{contextFeMale.valueMale}}
+            <label for="female">
+              Female
+              <input id="female" type="radio" value="female" name="inputGender" formControlName="inputGender">
             </label>
-            <ng-container *ngTemplateOutlet="tmplInput; context: contextFeMale"></ng-container>
+<!--            <label [for]="contextFeMale.id">-->
+<!--              {{contextFeMale.value}}-->
+<!--              <ng-container *ngTemplateOutlet="tmplInput; context: contextFeMale"></ng-container>-->
+<!--            </label>-->
           </div>
         </div>
 
@@ -97,12 +110,12 @@
                    let-displayName="displayName"
                    let-type="type"
                    let-id="id"
+                   let-value="value"
       >
         <input
           [formControlName]="controlName"
           [type]="type"
           [id]="id"
-          [name]="controlName"
           [placeholder]="displayName"
           [ngClass]="{'input-error' : (isSubmit
                      && fgRegister.get(controlName).errors
