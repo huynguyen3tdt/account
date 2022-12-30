@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { checkName, checkPassword, checkEmail, matchPassword} from "./validator";
 import {
   FormGroup,
   FormControl,
@@ -8,67 +9,8 @@ import {
   ValidatorFn,
   ValidationErrors
 } from "@angular/forms";
+import {TranslateService} from "@ngx-translate/core";
 
-export function checkEmail(controls: AbstractControl) {
-  const valueEmail = controls.value.inputEmail;
-  if (!valueEmail) {
-    return {
-      emailNotEnoughLength: true,
-      messageEmail: 'Nhập email'
-    }
-  }
-  return null
-}
-
-export function matchPassword(controls: AbstractControl) {
-  const value = controls.value;
-  return (value.inputPassword === value.inputConfirm) ? null : {
-    passwordnotmatch: true,
-    invalid: true,
-    message: 'Các mật khẩu đã nhập không khớp. Hãy thử lại.'
-  }
-}
-
-export function checkPassword(controls: AbstractControl) {
-  const PASSWORD_MIN_LENGTH = 8;
-  const valuePassword = controls.value.inputPassword;
-
-  if (!valuePassword) {
-    return {
-      passNotEnoughLength: true,
-      invalid: true,
-      message: 'Nhập mật khẩu'
-    }
-  }
-
-  if (valuePassword.length < PASSWORD_MIN_LENGTH) {
-    return {
-      passLengthError: true,
-      invalid: true,
-      message: 'Mật khẩu phải nhiều hơn 8 ký tự'
-    }
-  }
-  const REX_UPPER_CASE = /[A-Z]+/.test(valuePassword);
-
-  const REX_LOWER_CASE = /[a-z]+/.test(valuePassword);
-
-  const REX_NUMBER = /[0-9]+/.test(valuePassword);
-
-  const REX_SPEACIAL_CHARACTER = /[!@#$%^&*()_+`,./;'{}]+/.test(valuePassword);
-
-  const passwordValid = (REX_UPPER_CASE && REX_LOWER_CASE) ||
-    (REX_UPPER_CASE && REX_NUMBER) ||
-    (REX_UPPER_CASE && REX_SPEACIAL_CHARACTER) ||
-    (REX_LOWER_CASE && REX_NUMBER) ||
-    (REX_NUMBER && REX_SPEACIAL_CHARACTER) ||
-    (REX_LOWER_CASE && REX_SPEACIAL_CHARACTER)
-
-  return !passwordValid ? {
-    passwordStrength: true,
-    invalid: true,
-    message: 'Mật khẩu phải chứa ít nhất hai trong số các ký tự sau: chữ hoa, chữ thường, số hoặc ký hiệu.'
-  } : null;
-}
 
 @Component({
   selector: 'app-account',
@@ -79,6 +21,11 @@ export class AccountComponent implements OnInit {
   fgRegister: FormGroup = new FormGroup({});
   isSubmit = false;
   isConfirm = true;
+  lang;
+
+  constructor(private translate: TranslateService) {
+
+  }
 
   ngOnInit() {
     this.fgRegister = new FormGroup({ //inputSurName thuộc vào fgRegister
@@ -100,7 +47,7 @@ export class AccountComponent implements OnInit {
         inputConfirm: new FormControl('')
       },
       {
-        validators: [matchPassword, checkEmail, checkPassword]
+        validators: [matchPassword, checkEmail, checkPassword,checkName]
       })
   }
 
@@ -114,14 +61,20 @@ export class AccountComponent implements OnInit {
     this.contextPassword.type = this.contextPassword.type === 'text' ? 'password' : 'text';
   }
 
+  changLang(event: any) {
+    this.translate.use(event.target.value)
+    console.log(event.target.value);
+    localStorage.setItem("lang", event.target.value);
+  }
+
   contextSurname = {
     controlName: "inputSurname",
-    displayName: "Họ",
+    displayName: "Last Name",
     placeholder: "họ"
   };
   contextName = {
     controlName: "inputName",
-    displayName: "Tên",
+    displayName: "First Name",
     placeholder: "tên"
 
   }
@@ -131,32 +84,32 @@ export class AccountComponent implements OnInit {
   }
   contextDate = {
     controlName: "inputDate",
-    displayName: "Ngày sinh",
+    displayName: "Date",
     type: "date"
   }
   contextMale = {
     id: "male",
     controlName: "inputGender",
-    displayName: "Giới tính",
+    displayName: "Gender",
     type: "radio",
     value: 'Male'
   }
   contextFeMale = {
     id: "female",
     controlName: "inputGender",
-    displayName: "Giới tính",
+    displayName: "Gender",
     type: "radio",
     value: 'Female'
   }
 
   contextPassword = {
     controlName: "inputPassword",
-    displayName: "Mật Khẩu",
+    displayName: "Password",
     type: "password"
   }
   contextConfirm = {
     controlName: "inputConfirm",
-    displayName: "Xác Nhận",
+    displayName: "Confirm Password",
     type: "password"
   }
 }

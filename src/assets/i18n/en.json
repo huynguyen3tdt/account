@@ -1,0 +1,23 @@
+{
+  "Signup": "Signup",
+  "First Name": "First Name",
+  "Last Name": "Last Name",
+  "Email": "Email",
+  "Use letters, numbers, and periods": "Use letters, numbers, and periods",
+  "Date": "Date",
+  "Gender": "Gender",
+  "Password": "Password",
+  "Male": "Male",
+  "Female": "Female",
+  "Confirm Password": "Confirm Password",
+  "Show password": "Show password",
+  "Next": "Next",
+  "Enter email": "Enter email",
+  "Enter password": "Enter password",
+  "Enter first name": "Enter first name",
+  "Enter last name": "Enter last name",
+  "Enter first name and last name": "Enter first name and last name",
+  "Wrong email format": "Wrong email format",
+  "The entered passwords do not match. Try again.": "The entered passwords do not match. Try again.",
+  "Password must be more than 8 characters": "Password must be more than 8 characters"
+}

@@ -1,9 +1,15 @@
+<app-home></app-home>
 <div class="app">
   <div class="wrapper">
-    <h2 class="title">Đăng ký</h2>
-
-    <div class="changeLanguage">
-
+    <div class="wrapper-header">
+      <h2 class="title">{{ 'Signup' | translate }}</h2>
+      <div class="changeLanguage">
+        <select name="" id="" (change)="changLang($event)">
+          <option value="vi" [selected]="lang=='vi'">Việt Nam</option>
+          <option value="en" [selected]="lang=='en'">English</option>
+          <option value="jp" [selected]="lang=='jp'">Japan</option>
+        </select>
+      </div>
     </div>
 
     <form [formGroup]="fgRegister"
@@ -24,9 +30,10 @@
                     "
               class="item-error"
         >
-          Hãy nhập {{ fgRegister.controls['inputSurname'].errors ? 'họ ' : '' }}
-          {{ fgRegister.controls['inputSurname'].errors && fgRegister.controls['inputName'].errors ? 'và ' : ''}}
-          {{ fgRegister.controls['inputName'].errors ? 'tên ' : ''}}
+<!--          Hãy nhập {{ fgRegister.controls['inputSurname'].errors ? 'họ ' : '' }}-->
+<!--          {{ fgRegister.controls['inputSurname'].errors && fgRegister.controls['inputName'].errors ? 'và ' : ''}}-->
+<!--          {{ fgRegister.controls['inputName'].errors ? 'tên ' : ''}}-->
+          {{fgRegister.errors['messageName'] | translate}}
         </span>
 
         <div class=" form-item form-email">
@@ -36,7 +43,7 @@
                      && fgRegister.hasError('emailNotEnoughLength')"
               class="item-error"
         >
-          {{fgRegister.errors['messageEmail']}}
+          {{fgRegister.errors['messageEmail'] | translate}}
         </span>
         <span *ngIf="isSubmit
                     && fgRegister.get('inputEmail').errors
@@ -44,43 +51,35 @@
               class="item-error"
         >
           {{
-          isSubmit
+          (isSubmit
           && fgRegister.get('inputEmail').errors
-          && !fgRegister.hasError('emailNotEnoughLength') ? 'Sai định dạng email' : ''
-          }}
+          && !fgRegister.hasError('emailNotEnoughLength') ? 'Wrong email format' : ''
+            ) | translate}}
         </span>
-        <span class="email-supp">Sử dụng chữ cái, số và dấu chấm</span>
+        <span class="email-supp">{{ 'Use letters, numbers, and periods' | translate}}</span>
 
         <div class="form-item left">
           <label class="label-item">
-            {{contextDate.displayName + ': '}}
+            {{'Date' | translate}}{{':'}}
           </label>
           <ng-container *ngTemplateOutlet="tmplInput; context: contextDate"></ng-container>
         </div>
 
         <div class="form-item left">
           <span class="label-item">
-            {{contextMale.displayName + ': '}}
+            {{'Gender' | translate}}{{':'}}
           </span>
           <div class="gender-item">
             <label for="male">
               Male
               <input id="male" type="radio" value="male" name="inputGender" formControlName="inputGender">
             </label>
-<!--            <label [for]="contextMale.id">-->
-<!--              {{contextMale.value}}-->
-<!--              <ng-container *ngTemplateOutlet="tmplInput; context: contextMale"></ng-container>-->
-<!--            </label>-->
           </div>
           <div class="gender-item">
             <label for="female">
               Female
               <input id="female" type="radio" value="female" name="inputGender" formControlName="inputGender">
             </label>
-<!--            <label [for]="contextFeMale.id">-->
-<!--              {{contextFeMale.value}}-->
-<!--              <ng-container *ngTemplateOutlet="tmplInput; context: contextFeMale"></ng-container>-->
-<!--            </label>-->
           </div>
         </div>
 
@@ -92,18 +91,20 @@
                      fgRegister.hasError('invalid')"
               class="item-error"
         >
-          {{fgRegister.errors['message']}}
+          {{fgRegister.errors['message'] | translate}}
         </span>
 
         <div class="confirmPass">
           <input type="checkbox" id="checkPass" (click)="showPass()" class="checkPass">
           <label for="checkPass">
-            Hiện mật khẩu
+            {{'Show password' | translate}}
           </label>
         </div>
 
       </div>
-      <button class="btn-submit" type="submit">Tiếp theo</button>
+      <div class="form-item">
+        <button class="btn-submit" type="submit">{{ 'Next' | translate}}</button>
+      </div>
 
       <ng-template #tmplInput
                    let-controlName="controlName"
@@ -116,7 +117,7 @@
           [formControlName]="controlName"
           [type]="type"
           [id]="id"
-          [placeholder]="displayName"
+          [placeholder]="displayName | translate"
           [ngClass]="{'input-error' : (isSubmit
                      && fgRegister.get(controlName).errors
                      && fgRegister.get(controlName).touched
@@ -129,7 +130,7 @@
     </form>
 
   </div>
-
+  <!--  <app-verify *ngIf="isNext"[infor] = "account"></app-verify>-->
 </div>
 
 

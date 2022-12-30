@@ -1,0 +1,23 @@
+{
+  "Signup": "Đăng ký",
+  "First Name": "Tên",
+  "Last Name": "Họ",
+  "Email": "Email",
+  "Use letters, numbers, and periods": "Sử dụng chữ cái, số và dấu chấm",
+  "Date": "Ngày sinh",
+  "Gender": "Giới tính",
+  "Password": "Mật khẩu",
+  "Male": "Nam",
+  "Female": "Nữ",
+  "Confirm Password": "Xác nhận",
+  "Show password": "Hiện mật khẩu",
+  "Next": "Kế tiếp",
+  "Enter email": "Nhập email",
+  "Enter password": "Nhập mật khẩu",
+  "Enter first name": "Hãy nhập tên",
+  "Enter last name": "Hãy nhập họ",
+  "Enter first name and last name": "Hãy nhập họ và tên",
+  "Wrong email format": "Sai định dạng email",
+  "The entered passwords do not match. Try again.": "Các mật khẩu đã nhập không khớp. Hãy thử lại.",
+  "Password must be more than 8 characters": "Mật khẩu phải nhiều hơn 8 ký tự"
+}
