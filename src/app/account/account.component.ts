@@ -54,7 +54,6 @@ export class AccountComponent implements OnInit {
   onSubmit(rf: object) {
     this.isSubmit = true;
     this.fgRegister.markAllAsTouched();
-    console.log(this.fgRegister.value);
   }
 
   showPass() {
@@ -63,19 +62,16 @@ export class AccountComponent implements OnInit {
 
   changLang(event: any) {
     this.translate.use(event.target.value)
-    console.log(event.target.value);
     localStorage.setItem("lang", event.target.value);
   }
 
   contextSurname = {
     controlName: "inputSurname",
     displayName: "Last Name",
-    placeholder: "họ"
   };
   contextName = {
     controlName: "inputName",
     displayName: "First Name",
-    placeholder: "tên"
 
   }
   contextEmail = {

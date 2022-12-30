@@ -53,11 +53,9 @@
   margin-top: 30px;
 }
 
-
 .email-supp {
   color: #7b7b7b;
 }
-
 
 .item-input {
   outline: none;
@@ -119,14 +117,17 @@
   align-items: center;
   flex-direction: row-reverse;
 }
+
 .gender-item:first-of-type{
   padding-left: 5px;
 }
+
 .gender-item label{
   font-size: 12px;
   display: flex;
   flex-direction: row-reverse;
 }
+
 .gender-item input[type="radio"],
 .gender-item input[type="radio"]:focus
 {
