@@ -19,5 +19,7 @@
   "Enter first name and last name": "Enter first name and last name",
   "Wrong email format": "Wrong email format",
   "The entered passwords do not match. Try again.": "The entered passwords do not match. Try again.",
-  "Password must be more than 8 characters": "Password must be more than 8 characters"
+  "Password must be more than 8 characters": "Password must be more than 8 characters",
+  "The password must contain at least two of the following characters: uppercase, lowercase, numbers, or symbols.":
+  "The password must contain at least two of the following characters: uppercase, lowercase, numbers, or symbols."
 }

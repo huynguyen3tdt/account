@@ -19,5 +19,7 @@
   "Enter first name and last name": "Hãy nhập họ và tên",
   "Wrong email format": "Sai định dạng email",
   "The entered passwords do not match. Try again.": "Các mật khẩu đã nhập không khớp. Hãy thử lại.",
-  "Password must be more than 8 characters": "Mật khẩu phải nhiều hơn 8 ký tự"
+  "Password must be more than 8 characters": "Mật khẩu phải nhiều hơn 8 ký tự",
+  "The password must contain at least two of the following characters: uppercase, lowercase, numbers, or symbols.": "Mật khẩu phải chứa ít nhất hai trong số các ký tự sau: chữ hoa, chữ thường, số hoặc ký hiệu."
+  
 }

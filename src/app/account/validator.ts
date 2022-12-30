@@ -75,6 +75,6 @@ export function checkPassword(controls: AbstractControl) {
   return !passwordValid ? {
     passwordStrength: true,
     invalid: true,
-    message: 'Mật khẩu phải chứa ít nhất hai trong số các ký tự sau: chữ hoa, chữ thường, số hoặc ký hiệu.'
+    message: 'The password must contain at least two of the following characters: uppercase, lowercase, numbers, or symbols.'
   } : null;
 }

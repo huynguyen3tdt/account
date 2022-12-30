@@ -49,9 +49,9 @@
         >
           {{
           (isSubmit
-          && fgRegister.get('inputEmail').errors
-          && !fgRegister.hasError('emailNotEnoughLength') ? 'Wrong email format' : ''
-            ) | translate}}
+            && fgRegister.get('inputEmail').errors
+            && !fgRegister.hasError('emailNotEnoughLength') ? 'Wrong email format' : ''
+          ) | translate}}
         </span>
         <span class="email-supp">{{ 'Use letters, numbers, and periods' | translate}}</span>
 
