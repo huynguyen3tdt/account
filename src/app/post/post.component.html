@@ -1,0 +1,26 @@
+<app-home></app-home>
+<div class="wrapper-post">
+<!--  <pre>-->
+<!--    {{posts | json}}-->
+<!--  </pre>-->
+  <div *ngFor="let item of posts; let i = index"
+       class="list-post">
+
+    <div class="text">
+      <p style="font-weight: bold">
+        {{item.id}}
+        {{item.title}}
+      </p>
+      <p style="font-style: italic;margin-top: 10px">
+        {{item.body}}
+      </p>
+    </div>
+
+    <div *ngFor="let img of imgs let j = index"
+         class="img">
+      <img *ngIf="i==j"
+           [src]="img.thumbnailUrl"
+           alt="">
+    </div>
+  </div>
+</div>

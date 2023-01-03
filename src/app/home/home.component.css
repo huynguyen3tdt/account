@@ -41,3 +41,9 @@ a{
   background-color: #1759b2;
   color: white;
 }
+.header-nav{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}

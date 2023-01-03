@@ -12,6 +12,9 @@ import { InfoComponent } from './info/info.component';
 import {RouterModule, Routes} from "@angular/router";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { VerifyComponent } from './account/verify/verify.component';
+import { PostComponent } from './post/post.component';
+import { CustomPipePipe } from './pipes/custom-pipe.pipe';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
@@ -25,6 +28,14 @@ const routes: Routes = [
   {
     path: 'info',
     component: InfoComponent
+  },
+  {
+    path: 'post',
+    component: PostComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: '',
@@ -48,7 +59,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     InfoComponent,
     NotFoundComponent,
-    VerifyComponent
+    VerifyComponent,
+    PostComponent,
+    CustomPipePipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -4,10 +4,10 @@
     <div class="wrapper-header">
       <h2 class="title">{{ 'Signup' | translate }}</h2>
       <div class="changeLanguage">
-        <select name="" id="" (change)="changLang($event)">
-          <option value="vi" [selected]="lang=='vi'">Việt Nam</option>
-          <option value="en" [selected]="lang=='en'">English</option>
-          <option value="jp" [selected]="lang=='jp'">Japan</option>
+        <select name="" id="" (change)="changeLang($event)">
+          <option value="en" [selected]="LANGUAGE=='en'">English</option>
+          <option value="vi" [selected]="LANGUAGE=='vi'">{{"Vietnamese" | translate }}</option>
+          <option value="jp" [selected]="LANGUAGE=='jp'">Japan</option>
         </select>
       </div>
     </div>
@@ -18,11 +18,12 @@
     >
       <div class="wrapper-form">
 
+
         <div class="form-item">
           <ng-container *ngTemplateOutlet="tmplInput; context: contextSurname"></ng-container>
           <ng-container *ngTemplateOutlet="tmplInput; context: contextName"></ng-container>
         </div>
-        <span *ngIf="isSubmit
+        <span *ngIf="isSubmitted
                     && (
                       fgRegister.controls['inputSurname'].errors
                       || fgRegister.controls['inputName'].errors
@@ -33,27 +34,18 @@
           {{fgRegister.errors['messageName'] | translate}}
         </span>
 
+
         <div class=" form-item form-email">
           <ng-container *ngTemplateOutlet="tmplInput; context: contextEmail"></ng-container>
         </div>
-        <span *ngIf="isSubmit
-                     && fgRegister.hasError('emailNotEnoughLength')"
+        <span *ngIf="isSubmitted
+                     && fgRegister.hasError('invalidEmail')"
               class="item-error"
         >
           {{fgRegister.errors['messageEmail'] | translate}}
         </span>
-        <span *ngIf="isSubmit
-                    && fgRegister.get('inputEmail').errors
-                    && !fgRegister.hasError('emailNotEnoughLength')"
-              class="item-error"
-        >
-          {{
-          (isSubmit
-            && fgRegister.get('inputEmail').errors
-            && !fgRegister.hasError('emailNotEnoughLength') ? 'Wrong email format' : ''
-          ) | translate}}
-        </span>
         <span class="email-supp">{{ 'Use letters, numbers, and periods' | translate}}</span>
+
 
         <div class="form-item left">
           <label class="label-item">
@@ -62,45 +54,51 @@
           <ng-container *ngTemplateOutlet="tmplInput; context: contextDate"></ng-container>
         </div>
 
+
         <div class="form-item left">
           <span class="label-item">
             {{'Gender' | translate}}{{':'}}
           </span>
           <div class="gender-item">
             <label for="male">
-              Male
+              {{'Male' | translate }}
               <input id="male" type="radio" value="male" name="inputGender" formControlName="inputGender">
             </label>
           </div>
           <div class="gender-item">
             <label for="female">
-              Female
+              {{'Female' | translate }}
               <input id="female" type="radio" value="female" name="inputGender" formControlName="inputGender">
             </label>
           </div>
         </div>
 
+
         <div class="form-item form-password">
           <ng-container *ngTemplateOutlet="tmplInput; context: contextPassword"></ng-container>
           <ng-container *ngTemplateOutlet="tmplInput; context: contextConfirm"></ng-container>
         </div>
-        <span *ngIf="isSubmit &&
+        <span *ngIf="isSubmitted &&
                      fgRegister.hasError('invalid')"
               class="item-error"
         >
           {{fgRegister.errors['message'] | translate}}
         </span>
 
+
         <div class="confirmPass">
-          <input type="checkbox" id="checkPass" (click)="showPass()" class="checkPass">
+          <input type="checkbox" id="checkPass" (click)="toggleShowPassword()" class="checkPass">
           <label for="checkPass">
             {{'Show password' | translate}}
           </label>
         </div>
 
+
       </div>
       <div class="form-item">
-        <button class="btn-submit" type="submit">{{ 'Next' | translate}}</button>
+        <button class="btn-submit" type="submit">
+          <a>{{ 'Next' | translate}}</a>
+        </button>
       </div>
 
       <ng-template #tmplInput
@@ -115,7 +113,7 @@
           [type]="type"
           [id]="id"
           [placeholder]="displayName | translate"
-          [ngClass]="{'input-error' : (isSubmit
+          [ngClass]="{'input-error' : (isSubmitted
                      && fgRegister.get(controlName).errors
                      && fgRegister.get(controlName).touched
                      &&fgRegister.hasError('invalid'))}
@@ -123,12 +121,13 @@
           class="item-input"
         >
       </ng-template>
-
     </form>
 
   </div>
-  <!--  <app-verify *ngIf="isNext"[infor] = "account"></app-verify>-->
 </div>
+<pre>
+  {{fgRegister.value | json }}
+</pre>
 
 
 

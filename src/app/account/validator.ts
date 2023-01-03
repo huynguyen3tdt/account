@@ -1,13 +1,29 @@
 import {AbstractControl} from "@angular/forms";
+import {
+  PASSWORD_MIN_LENGTH,
+  REX_SPEACIAL_CHARACTER,
+  REX_UPPER_CASE,
+  REX_LOWER_CASE,
+  REX_NUMBER
+} from "../regex.constant";
 
-export function checkEmail(controls: AbstractControl) {
+export function validateEmail(controls: AbstractControl) {
   const valueEmail = controls.value.inputEmail;
+  const email = controls.get('inputEmail')
   if (!valueEmail) {
     return {
-      emailNotEnoughLength: true,
+      invalidEmail: true,
       messageEmail: 'Enter email'
     }
   }
+
+  if(email.errors){
+    return {
+      invalidEmail: true,
+      messageEmail: 'Wrong email format'
+    }
+  }
+
   return null
 }
 
@@ -38,43 +54,65 @@ export function matchPassword(controls: AbstractControl) {
   }
 }
 
-export function checkPassword(controls: AbstractControl) {
-  const PASSWORD_MIN_LENGTH = 8;
-  const valuePassword = controls.value.inputPassword;
+export function validatePassword(form: AbstractControl) {
 
-  if (!valuePassword) {
+  const password = form.get('inputPassword');
+  const passwordValue = password.value;
+  if (!passwordValue) {
+    password.setErrors({
+        passNotEnoughLength: true,
+        invalid: true,
+      }
+    )
+    return {invalid: true, message: 'Enter password'};
+  }
+  if (!passwordValue) {
+    password.setErrors({
+        passNotEnoughLength: true,
+        invalid: true
+      }
+    )
     return {
-      passNotEnoughLength: true,
       invalid: true,
       message: 'Enter password'
-    }
+    };
   }
 
-  if (valuePassword.length < PASSWORD_MIN_LENGTH) {
-    return {
+  if (passwordValue.length < PASSWORD_MIN_LENGTH) {
+    password.setErrors({
       passLengthError: true,
+      invalid: true
+    })
+    return {
       invalid: true,
       message: 'Password must be more than 8 characters'
-    }
+    };
   }
-  const REX_UPPER_CASE = /[A-Z]+/.test(valuePassword);
+  const containUpperCase = REX_UPPER_CASE.test(passwordValue);
 
-  const REX_LOWER_CASE = /[a-z]+/.test(valuePassword);
+  const containLowerCase = REX_LOWER_CASE.test(passwordValue);
 
-  const REX_NUMBER = /[0-9]+/.test(valuePassword);
+  const containNumber = REX_NUMBER.test(passwordValue);
 
-  const REX_SPEACIAL_CHARACTER = /[!@#$%^&*()_+`,./;'{}]+/.test(valuePassword);
+  const ContainSpeacitalCharactor = REX_SPEACIAL_CHARACTER.test(passwordValue);
 
-  const passwordValid = (REX_UPPER_CASE && REX_LOWER_CASE) ||
-    (REX_UPPER_CASE && REX_NUMBER) ||
-    (REX_UPPER_CASE && REX_SPEACIAL_CHARACTER) ||
-    (REX_LOWER_CASE && REX_NUMBER) ||
-    (REX_NUMBER && REX_SPEACIAL_CHARACTER) ||
-    (REX_LOWER_CASE && REX_SPEACIAL_CHARACTER)
+  const passwordValid = (containUpperCase && containLowerCase) ||
+    (containUpperCase && containNumber) ||
+    (containUpperCase && ContainSpeacitalCharactor) ||
+    (containLowerCase && containNumber) ||
+    (containNumber && ContainSpeacitalCharactor) ||
+    (containLowerCase && ContainSpeacitalCharactor)
 
-  return !passwordValid ? {
-    passwordStrength: true,
-    invalid: true,
-    message: 'The password must contain at least two of the following characters: uppercase, lowercase, numbers, or symbols.'
-  } : null;
+  if (!passwordValid) {
+    password.setErrors(
+      {
+        passwordStrength: true,
+        invalid: true
+      })
+    return {
+      invalid: true,
+      message: 'The password must contain at least two of the following characters: uppercase, lowercase, numbers, or symbols.'
+    };
+  }
+  return null;
 }

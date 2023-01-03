@@ -1,0 +1,22 @@
+<app-home xmlns="http://www.w3.org/1999/html"></app-home>
+<div class="app">
+  <div class="wrapper">
+    <form action="" class="form-div" (ngSubmit)="onSignin()">
+
+      <div class=" form-item">
+        <span>Email</span>
+        <input type="text" [value]="inputEmail">
+      </div>
+      <div class=" form-item">
+        <span>{{'Password' | translate}}</span>
+        <input type="password" [value]="inputPassword">
+      </div>
+
+      <div class="">
+        <button type="submit" class="btn-submit">
+          <a>{{'SignIn' | translate}}</a>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

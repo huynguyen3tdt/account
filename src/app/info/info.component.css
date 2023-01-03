@@ -1,0 +1,25 @@
+.wrapper-info{
+  height: 80vh;
+  margin-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.info-content{
+  border: 1px solid #ccc;
+  list-style: none;
+  padding: 20px;
+  border-radius: 5px;
+}
+.info-content span{
+  display: inline-block;
+  width: 200px;
+  font-weight: 600;
+  font-family: arial;
+}
+.info-content li {
+  padding: 10px;
+  padding-right: 200px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}

@@ -1,16 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import { checkName, checkPassword, checkEmail, matchPassword} from "./validator";
+import {checkName, validateEmail, matchPassword, validatePassword} from "./validator";
 import {
   FormGroup,
   FormControl,
-  Validator,
   Validators,
-  AbstractControl,
-  ValidatorFn,
-  ValidationErrors
 } from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
-
+import {Route, Router, Routes} from "@angular/router";
 
 @Component({
   selector: 'app-account',
@@ -19,17 +15,24 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class AccountComponent implements OnInit {
   fgRegister: FormGroup = new FormGroup({});
-  isSubmit = false;
-  isConfirm = true;
-  lang;
 
-  constructor(private translate: TranslateService) {
+  isSubmitted = false;
 
+  LANGUAGE;
+
+
+  constructor(
+    private translate: TranslateService,
+    private route: Router
+  ) {
   }
 
   ngOnInit() {
-    this.fgRegister = new FormGroup({ //inputSurName thuộc vào fgRegister
-        inputSurname: new FormControl('', {validators: [Validators.required], updateOn: "change"}),
+    this.fgRegister = new FormGroup({
+        inputSurname: new FormControl('', {
+          validators: [Validators.required],
+          updateOn: "change"
+        }),
         inputName: new FormControl('', Validators.required),
         inputEmail: new FormControl('', {
           validators: [Validators.required, Validators.email],
@@ -43,32 +46,45 @@ export class AccountComponent implements OnInit {
           validators: [Validators.required],
           updateOn: "change"
         }),
-        inputPassword: new FormControl('', [Validators.required, Validators.minLength(8),checkEmail]),
+        inputPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
         inputConfirm: new FormControl('')
       },
       {
-        validators: [matchPassword, checkEmail, checkPassword,checkName]
+        validators: [matchPassword, validateEmail, validatePassword, checkName]
       })
   }
 
   onSubmit(rf: object) {
-    this.isSubmit = true;
+    this.isSubmitted = true;
     this.fgRegister.markAllAsTouched();
+    this.fgRegister.updateValueAndValidity();
+    if(this.fgRegister.valid){
+      localStorage.setItem("inputSurname", this.fgRegister.get('inputSurname').value);
+      localStorage.setItem("inputName", this.fgRegister.get('inputName').value);
+      localStorage.setItem("inputEmail", this.fgRegister.get('inputEmail').value);
+      localStorage.setItem("inputDate", this.fgRegister.get('inputDate').value);
+      localStorage.setItem("inputGender", this.fgRegister.get('inputGender').value);
+      localStorage.setItem("inputPassword", this.fgRegister.get('inputPassword').value);
+      this.route.navigate(['/info'])
+    }
   }
 
-  showPass() {
+  toggleShowPassword() {
     this.contextPassword.type = this.contextPassword.type === 'text' ? 'password' : 'text';
   }
 
-  changLang(event: any) {
-    this.translate.use(event.target.value)
-    localStorage.setItem("lang", event.target.value);
+  changeLang(event: Event) {
+    const target = (event.target as HTMLInputElement);
+    console.log(target.value)
+    this.translate.use(target.value)
+    localStorage.setItem("lang", target.value);
   }
 
   contextSurname = {
     controlName: "inputSurname",
     displayName: "Last Name",
   };
+
   contextName = {
     controlName: "inputName",
     displayName: "First Name",
@@ -78,24 +94,11 @@ export class AccountComponent implements OnInit {
     controlName: "inputEmail",
     displayName: "Email",
   }
+
   contextDate = {
     controlName: "inputDate",
     displayName: "Date",
     type: "date"
-  }
-  contextMale = {
-    id: "male",
-    controlName: "inputGender",
-    displayName: "Gender",
-    type: "radio",
-    value: 'Male'
-  }
-  contextFeMale = {
-    id: "female",
-    controlName: "inputGender",
-    displayName: "Gender",
-    type: "radio",
-    value: 'Female'
   }
 
   contextPassword = {
@@ -103,6 +106,7 @@ export class AccountComponent implements OnInit {
     displayName: "Password",
     type: "password"
   }
+
   contextConfirm = {
     controlName: "inputConfirm",
     displayName: "Confirm Password",

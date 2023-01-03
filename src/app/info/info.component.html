@@ -1,1 +1,24 @@
-<p>info works!</p>
+<app-home></app-home>
+<div class="wrapper-info">
+  <ul class="info-content">
+    <li>
+      <span>{{"First Name" | translate}}</span>
+      {{inputSurname}}
+    </li>
+    <li>
+      <span>{{"Last Name" | translate}}</span>
+      {{inputName}}</li>
+    <li>
+      <span>{{"Email" | translate}}</span>
+      {{inputEmail}}</li>
+    <li>
+      <span>{{"Date" | translate}}</span>
+      {{inputDate | date: 'dd/MM/yyyy'}}</li>
+    <li>
+      <span>{{"Gender" | translate}}</span>
+      {{inputGender}}</li>
+    <li>
+      <span>{{"Password" | translate}}</span>
+      {{inputPassword | customPipe}}</li>
+  </ul>
+</div>
