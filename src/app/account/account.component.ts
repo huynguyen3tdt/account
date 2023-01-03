@@ -43,7 +43,7 @@ export class AccountComponent implements OnInit {
           validators: [Validators.required],
           updateOn: "change"
         }),
-        inputPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+        inputPassword: new FormControl('', [Validators.required, Validators.minLength(8),checkEmail]),
         inputConfirm: new FormControl('')
       },
       {
