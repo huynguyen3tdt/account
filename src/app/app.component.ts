@@ -9,7 +9,7 @@ import {TranslateService} from "@ngx-translate/core";
 export class AppComponent {
   title = 'registerForm';
   constructor(private translate: TranslateService) {
-    translate.addLangs(['vi','en','jp']);
+    translate.addLangs(['en','vi','jp']);
     translate.setDefaultLang("en");
   }
 }
