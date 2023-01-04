@@ -1,7 +1,11 @@
 <app-home xmlns="http://www.w3.org/1999/html"></app-home>
 <div class="app">
   <div class="wrapper">
-    <form action="" class="form-div" (ngSubmit)="onSignin()">
+    <form
+      [formGroup]="fgLogin"
+      (ngSubmit)="onSignin()"
+      class="form-div"
+    >
 
       <div class=" form-item">
         <span>Email</span>
@@ -11,6 +15,14 @@
         <span>{{'Password' | translate}}</span>
         <input type="password" [value]="inputPassword">
       </div>
+      <div class=" form-item">
+        <input type="text">
+        <div class="randomcaptcha">
+          <p class="custom-captcha">{{valueCaptcha}}</p>
+          <i (click)="reCaptcha()" [ngClass]="{'active': toggle}" class='reload fa fa-refresh' ></i>
+        </div>
+      </div>
+      <span class="item-error">Sai Captcha</span>
 
       <div class="">
         <button type="submit" class="btn-submit">

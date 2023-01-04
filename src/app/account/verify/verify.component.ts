@@ -14,11 +14,6 @@ export class VerifyComponent implements OnInit{
   @ViewChild('captchaElem') captchaElem: ReCaptcha2Component;
   @ViewChild('langInput') langInput: ElementRef;
 
-  public captchaIsLoaded = false;
-  public captchaSuccess = false;
-  public captchaIsExpired = false;
-  public captchaResponse?: string;
-
   public theme: 'light' | 'dark' = 'light';
   public size: 'compact' | 'normal' = 'normal';
   public lang = 'en';

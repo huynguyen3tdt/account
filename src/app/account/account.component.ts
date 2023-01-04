@@ -77,15 +77,19 @@ export class AccountComponent implements OnInit {
     displayName: "Last Name",
   };
 
+
   contextName = {
     controlName: "inputName",
     displayName: "First Name",
 
   }
+
+
   contextEmail = {
     controlName: "inputEmail",
     displayName: "Email",
   }
+
 
   contextDate = {
     controlName: "inputDate",
@@ -94,11 +98,13 @@ export class AccountComponent implements OnInit {
     maxValue: this.datePipe.transform(new Date(), REX_DATE_FORMAT)
   }
 
+
   contextPassword = {
     controlName: "inputPassword",
     displayName: "Password",
     type: "password"
   }
+
 
   contextConfirm = {
     controlName: "inputConfirm",
