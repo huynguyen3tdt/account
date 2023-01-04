@@ -3,16 +3,17 @@
   <div class="header-left">
     <h1><a routerLink="/home">Home</a></h1>
   </div>
-  <div class="">
-    <nav class="header-nav">
-      <a routerLink="/post">
-        Post
-      </a>
-      <a routerLink="/info">
-        Show Info
-      </a>
-    </nav>
-  </div>
+
+  <nav class="header-nav">
+    <a routerLink="/post">
+      Post
+    </a>
+    <a routerLink="/info">
+      {{'Show Info'|translate}}
+    </a>
+  </nav>
+
+
   <div class="header-right">
     <nav class="link-list">
       <a routerLink="/account" class="link-item">
@@ -21,6 +22,14 @@
       <a routerLink="/login" class="link-item">
         {{'SignIn' | translate}}
       </a>
+      <div class="changeLanguage">
+        <select (change)="changeLang($event)">
+          <option value="en" [selected]="LANGUAGE=='en'">English</option>
+          <option value="vi" [selected]="LANGUAGE=='vi'">{{"Vietnamese" | translate }}</option>
+          <option value="jp" [selected]="LANGUAGE=='jp'">Japan</option>
+        </select>
+      </div>
     </nav>
   </div>
+
 </header>

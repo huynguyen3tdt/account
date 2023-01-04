@@ -29,12 +29,14 @@ export function validateEmail(controls: AbstractControl) {
 
 export function checkName(controls: AbstractControl) {
   const value = controls.value;
+
   if (!value.inputSurname) {
     return {
       invalid: true,
       messageName: 'Enter first name'
     }
   }
+
   if (!value.inputName) {
     return {
       invalid: true,
@@ -58,6 +60,7 @@ export function validatePassword(form: AbstractControl) {
 
   const password = form.get('inputPassword');
   const passwordValue = password.value;
+
   if (!passwordValue) {
     password.setErrors({
         passNotEnoughLength: true,
@@ -66,6 +69,7 @@ export function validatePassword(form: AbstractControl) {
     )
     return {invalid: true, message: 'Enter password'};
   }
+
   if (!passwordValue) {
     password.setErrors({
         passNotEnoughLength: true,

@@ -1,11 +1,30 @@
-import { Component } from '@angular/core';
-// import {routerLink} from "@angular/core/schematics/migrations/router-link-with-href/util";
+import {Component, OnInit} from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  LANGUAGE;
+
+  constructor(
+    private translate: TranslateService,
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.LANGUAGE = this.translate.currentLang;
+
+  }
+
+  changeLang(event: Event) {
+    const target = (event.target as HTMLInputElement);
+    this.LANGUAGE = target.value;
+    this.translate.use(this.LANGUAGE)
+    localStorage.setItem("lang", target.value);
+  }
 
 }

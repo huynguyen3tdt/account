@@ -5,8 +5,10 @@ import {
   FormControl,
   Validators,
 } from "@angular/forms";
-import {TranslateService} from "@ngx-translate/core";
-import {Route, Router, Routes} from "@angular/router";
+import {Router} from "@angular/router";
+import {DatePipe} from "@angular/common";
+import {REX_DATE_FORMAT} from "../regex.constant";
+
 
 @Component({
   selector: 'app-account',
@@ -18,12 +20,9 @@ export class AccountComponent implements OnInit {
 
   isSubmitted = false;
 
-  LANGUAGE;
-
-
   constructor(
-    private translate: TranslateService,
-    private route: Router
+    private route: Router,
+    private datePipe: DatePipe
   ) {
   }
 
@@ -58,7 +57,7 @@ export class AccountComponent implements OnInit {
     this.isSubmitted = true;
     this.fgRegister.markAllAsTouched();
     this.fgRegister.updateValueAndValidity();
-    if(this.fgRegister.valid){
+    if (this.fgRegister.valid) {
       localStorage.setItem("inputSurname", this.fgRegister.get('inputSurname').value);
       localStorage.setItem("inputName", this.fgRegister.get('inputName').value);
       localStorage.setItem("inputEmail", this.fgRegister.get('inputEmail').value);
@@ -71,13 +70,6 @@ export class AccountComponent implements OnInit {
 
   toggleShowPassword() {
     this.contextPassword.type = this.contextPassword.type === 'text' ? 'password' : 'text';
-  }
-
-  changeLang(event: Event) {
-    const target = (event.target as HTMLInputElement);
-    console.log(target.value)
-    this.translate.use(target.value)
-    localStorage.setItem("lang", target.value);
   }
 
   contextSurname = {
@@ -98,7 +90,8 @@ export class AccountComponent implements OnInit {
   contextDate = {
     controlName: "inputDate",
     displayName: "Date",
-    type: "date"
+    type: "date",
+    maxValue: this.datePipe.transform(new Date(), REX_DATE_FORMAT)
   }
 
   contextPassword = {

@@ -15,6 +15,8 @@ import { VerifyComponent } from './account/verify/verify.component';
 import { PostComponent } from './post/post.component';
 import { CustomPipePipe } from './pipes/custom-pipe.pipe';
 import { LoginComponent } from './login/login.component';
+import {DatePipe} from "@angular/common";
+import {NgxCaptchaModule} from "ngx-captcha";
 
 const routes: Routes = [
   {
@@ -63,12 +65,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     PostComponent,
     CustomPipePipe,
     LoginComponent
+
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    NgxCaptchaModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -78,7 +82,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     RouterModule.forRoot(routes),
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

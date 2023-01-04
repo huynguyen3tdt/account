@@ -140,6 +140,7 @@
   outline: 0;
   box-shadow: none;
 }
+
 .left{
   justify-content: flex-start;
   gap: 20px;
@@ -155,11 +156,10 @@
   border: 1px solid #333;
 }
 
-.changeLanguage select {
-  outline: none;
-  border: 1px solid #ccc;
-  padding: 10px 20px;
-  border-radius: 4px;
+.form-password{
+  margin-bottom: 10px;
 }
+
+
 
 

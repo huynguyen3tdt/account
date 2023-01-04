@@ -27,7 +27,6 @@
 .form-item {
   width: 100%;
   display: flex;
-  gap: 5px;
   align-items: center;
   gap: 30px;
 }

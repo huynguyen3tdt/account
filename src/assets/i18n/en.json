@@ -23,5 +23,6 @@
   "The password must contain at least two of the following characters: uppercase, lowercase, numbers, or symbols.":
   "The password must contain at least two of the following characters: uppercase, lowercase, numbers, or symbols.",
   "Vietnamese": "Vietnamese",
-  "SignIn": "SignIn"
+  "SignIn": "SignIn",
+  "Show Info": "Show Info"
 }

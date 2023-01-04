@@ -22,5 +22,6 @@
   "Password must be more than 8 characters": "Mật khẩu phải nhiều hơn 8 ký tự",
   "The password must contain at least two of the following characters: uppercase, lowercase, numbers, or symbols.": "Mật khẩu phải chứa ít nhất hai trong số các ký tự sau: chữ hoa, chữ thường, số hoặc ký hiệu.",
   "Vietnamese": "Việt Nam",
-  "SignIn": "Đăng nhập"
+  "SignIn": "Đăng nhập",
+  "Show Info": "Xem thông tin"
 }

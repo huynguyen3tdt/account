@@ -1,1 +1,10 @@
-<p>verify works!</p>
+<form [formGroup]="fgCaptcha">
+  <ngx-recaptcha2
+    #captchaElem
+    siteKey="6LeFR6cUAAAAAGviLYm9xPsWGyVaTLjBCDFma9Yp"
+    (success)="handleSuccess($event)"
+    [size]="size"
+    [hl]="lang" [theme]="theme" [type]="type" formControlName="recaptcha"
+  >
+  </ngx-recaptcha2>
+</form>

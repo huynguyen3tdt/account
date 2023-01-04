@@ -2,14 +2,8 @@
 <div class="app">
   <div class="wrapper">
     <div class="wrapper-header">
-      <h2 class="title">{{ 'Signup' | translate }}</h2>
-      <div class="changeLanguage">
-        <select name="" id="" (change)="changeLang($event)">
-          <option value="en" [selected]="LANGUAGE=='en'">English</option>
-          <option value="vi" [selected]="LANGUAGE=='vi'">{{"Vietnamese" | translate }}</option>
-          <option value="jp" [selected]="LANGUAGE=='jp'">Japan</option>
-        </select>
-      </div>
+      <h2 class="title">{{ 'SignUp' | translate }}</h2>
+
     </div>
 
     <form [formGroup]="fgRegister"
@@ -92,9 +86,12 @@
             {{'Show password' | translate}}
           </label>
         </div>
-
-
       </div>
+
+      <div class="form-item">
+        <app-verify></app-verify>
+      </div>
+
       <div class="form-item">
         <button class="btn-submit" type="submit">
           <a>{{ 'Next' | translate}}</a>
@@ -107,11 +104,13 @@
                    let-type="type"
                    let-id="id"
                    let-value="value"
+                   let-maxValue="maxValue"
       >
         <input
           [formControlName]="controlName"
           [type]="type"
           [id]="id"
+          [max]="maxValue"
           [placeholder]="displayName | translate"
           [ngClass]="{'input-error' : (isSubmitted
                      && fgRegister.get(controlName).errors
@@ -125,9 +124,7 @@
 
   </div>
 </div>
-<pre>
-  {{fgRegister.value | json }}
-</pre>
+
 
 
 
